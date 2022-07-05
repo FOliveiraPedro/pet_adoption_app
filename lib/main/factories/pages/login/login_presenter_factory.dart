@@ -4,4 +4,5 @@ import '../../factories.dart';
 
 LoginPresenter makeGetxLoginPresenter() => GetxLoginPresenter(
       authLoginUseCase: makeRemoteAuthLoginUseCase(),
+      appNavigator: makeAppNavigator(),
     );

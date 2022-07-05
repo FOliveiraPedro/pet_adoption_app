@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../ui/theme/app_theme.dart';
 import 'factories/factories.dart';
+import 'routes/routes.dart';
 
 class App extends StatelessWidget {
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
@@ -21,14 +22,14 @@ class App extends StatelessWidget {
     );
 
     return GetMaterialApp(
-      title: 'Eva Benefícios',
+      title: 'Pet Adoption',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home',
+      initialRoute: AppRoutes.splashPage,
       navigatorKey: _navigatorKey,
       defaultTransition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 300),
-      theme: AppTheme.lightThemeData,
-      darkTheme: AppTheme.darkThemeData,
+      theme: AppTheme.defaultThemeData,
+      darkTheme: AppTheme.defaultThemeData,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -38,23 +39,18 @@ class App extends StatelessWidget {
         Locale('pt', 'BR'),
       ],
       fallbackLocale: const Locale('pt', 'BR'),
-      getPages: [
-        GetPage(
-          name: '/',
-          page: makeSplashPage,
-          title: 'Splash',
-        ),
-        GetPage(
-          name: '/home',
-          page: makeHomePage,
-          title: 'Inicio',
-        ),
-        GetPage(
-          name: '/login',
-          page: makeLoginPage,
-          title: 'Login',
-        ),
-      ],
+      onGenerateRoute: (settings) {
+        final route = AppRoutes.routesList.firstWhere(
+          (element) => settings.name == element.name,
+          orElse: () => throw Exception(
+            "The route ${settings.name} isn't registered on AppRoutes.",
+          ),
+        );
+
+        return MaterialPageRoute(
+          builder: (context) => route.child(AppRouteArguments(settings.arguments)),
+        );
+      },
     );
   }
 }

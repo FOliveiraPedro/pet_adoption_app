@@ -1,1 +1,3 @@
-abstract class SplashPresenter {}
+abstract class SplashPresenter {
+  void goToLogin();
+}

@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> with UIErrorManager {
   }
 
   @override
-  Widget build(final BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         body: Padding(
           padding: MediaQuery.of(context).viewPadding,
           child: CustomScrollView(

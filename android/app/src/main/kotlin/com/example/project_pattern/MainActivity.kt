@@ -1,4 +1,4 @@
-package com.example.project_pattern
+package com.foliveirapedro.pet_adoption
 
 import io.flutter.embedding.android.FlutterActivity
 
