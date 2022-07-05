@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../helpers/helpers.dart';
 import '../../theme/theme.dart';
@@ -7,14 +8,12 @@ import '../../theme/theme.dart';
 class CustomTextField extends StatefulWidget {
   final Function(String value) validateFunction;
   final TextInputType keyboardType;
-  String errorMessage;
   final Widget? suffixIcon;
 
-  CustomTextField({
+  const CustomTextField({
     Key? key,
     required this.validateFunction,
     this.keyboardType = TextInputType.text,
-    required this.errorMessage,
     this.suffixIcon,
   }) : super(key: key);
 
@@ -45,7 +44,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
         focusNode: _focusNode,
         maxLength: 100,
         cursorColor: AppColors.neutral0,
-        style: AppTextTheme.paragraph1.copyWith(),
+        style: GoogleFonts.workSans(
+          color: AppColors.purple,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
         validator: (value) {
           if (value == '') {
             return 'Campo obrigatório';
@@ -70,12 +73,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
           disabledBorder: colorBorder(),
           errorBorder: errorBorder(),
           focusedErrorBorder: colorBorder(),
-          labelStyle: AppTextTheme.paragraph1.copyWith(
-            color: AppColors.neutral0,
-          ),
-          floatingLabelStyle: AppTextTheme.caption1.copyWith(
-            color: _changeBorderColor,
-          ),
           suffixIcon: Padding(
             padding: const EdgeInsets.all(16),
             child: widget.suffixIcon,
@@ -88,15 +85,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         obscuringCharacter: '*',
       );
 
-  Color get _changeBorderColor {
-    if (widget.errorMessage == null && _textEditingController.text.isEmpty) {
-      return AppColors.neutral3;
-    } else if (widget.errorMessage != null) {
-      return AppColors.danger;
-    } else {
-      return AppColors.neutral0;
-    }
-  }
+
 
   OutlineInputBorder colorBorder() => OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),

@@ -10,4 +10,6 @@ abstract class LoginPresenter {
   Future login();
 
   void goToHome();
+
+  void goToSignUp();
 }

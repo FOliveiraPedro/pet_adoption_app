@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../components/components.dart';
 import '../../components/input/custom_password_text_field.dart';
 import '../../components/input/custom_text_field.dart';
 import '../../theme/theme.dart';
 import '../pages.dart';
 
-class LoginPage extends StatefulWidget {
-  final LoginPresenter presenter;
+class SignUpPage extends StatefulWidget {
+  final SignUpPresenter presenter;
 
-  const LoginPage({
+  const SignUpPage({
     Key? key,
     required this.presenter,
   }) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final formKey = GlobalKey<FormState>();
 
   bool changeColor = false;
@@ -53,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       CustomTextField(
-                        validateFunction: widget.presenter.validadeEmail,
+                        validateFunction: widget.presenter.validateEmail,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 16),
@@ -69,21 +70,40 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       CustomPasswordTextField(
-                        validateFunction: widget.presenter.validadePassword,
+                        validateFunction: widget.presenter.validatePassword,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: Text(
+                          'Confirm Password',
+                          style: GoogleFonts.workSans(
+                            color: changeColor
+                                ? AppColors.danger
+                                : AppColors.purple,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      CustomPasswordTextField(
+                        validateFunction: widget.presenter.validateConfirmPassword,
                       ),
                       GestureDetector(
                         onTap: () async {
                           setState((){
                             isLoading = true;
                           });
-                          print("isLoading" + isLoading.toString());
                           if (formKey.currentState!.validate()) {
-                            bool response = await widget.presenter.login();
+                            bool response = await widget.presenter.signUp();
                             if (response) {
                               setState((){
                                 isLoading = false;
                               });
-                              widget.presenter.goToHome();
+                              showSnackbarError(message: 'Registrated with success!');
+                              Future.delayed(const Duration(seconds: 2), () async {
+                                Navigator.pop(context);
+                              });
+
                             }
                           } else {
                             setState((){
@@ -106,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                                     color: AppColors.neutral7,
                                   )
                                 : Text(
-                                    'Sign In',
+                                    'Sign Up',
                                     style: GoogleFonts.workSans(
                                       color: AppColors.neutral7,
                                       fontSize: 24,
@@ -117,20 +137,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       )
                     ],
-                  ),
-                  GestureDetector(
-                    onTap: widget.presenter.goToSignUp,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Text(
-                        'Sign Up',
-                        style: GoogleFonts.workSans(
-                          color: AppColors.purple,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),

@@ -10,12 +10,10 @@ class CustomPasswordTextField extends StatefulWidget {
   final Function(String value) validateFunction;
   final TextInputType keyboardType;
   final bool showErrorMessage;
-  final String errorMessage;
 
   const CustomPasswordTextField({
     Key? key,
     required this.validateFunction,
-    required this.errorMessage,
     this.keyboardType = TextInputType.text,
     this.showErrorMessage = false,
   }) : super(key: key);
@@ -54,9 +52,11 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
             return 'Campo obrigatório';
           }
           if (value!.length < 6) {
-            return '';
+            return 'Deve possuir 6 digitos ou mais';
           }
-          widget.validateFunction(_textEditingController.text);
+          if(widget.validateFunction(_textEditingController.text) != null) {
+            return widget.validateFunction(_textEditingController.text);
+          }
         },
         decoration: InputDecoration(
           counterText: '',
@@ -71,13 +71,6 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
           disabledBorder: colorBorder(),
           errorBorder: errorBorder(),
           focusedErrorBorder: colorBorder(),
-          labelStyle: AppTextTheme.paragraph1.copyWith(
-            color: AppColors.neutral0,
-          ),
-          floatingLabelStyle: AppTextTheme.caption1.copyWith(
-            color: _changeBorderColor,
-          ),
-          errorText: widget.showErrorMessage ? widget.errorMessage : null,
           suffixIcon: Padding(
             padding: const EdgeInsets.all(16),
             child: GestureDetector(
@@ -94,16 +87,6 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
         ),
         obscuringCharacter: '*',
       );
-
-  Color get _changeBorderColor {
-    if (widget.errorMessage == null && _textEditingController.text.isEmpty) {
-      return AppColors.neutral3;
-    } else if (widget.errorMessage != null) {
-      return AppColors.danger;
-    } else {
-      return AppColors.neutral0;
-    }
-  }
 
   OutlineInputBorder colorBorder() => OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
