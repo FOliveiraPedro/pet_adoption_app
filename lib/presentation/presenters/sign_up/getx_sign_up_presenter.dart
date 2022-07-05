@@ -1,19 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/helpers/helpers.dart';
 import '../../../domain/usecases/usecases.dart';
 import '../../../main/routes/routes.dart';
 import '../../../ui/components/components.dart';
 import '../../../ui/pages/pages.dart';
-import '../../helpers/helpers.dart';
 import '../../mixins/mixins.dart';
 
-class GetxLoginPresenter extends GetxController with UIErrorManager implements LoginPresenter {
+class GetxSignUpPresenter extends GetxController with UIErrorManager implements SignUpPresenter {
   final AuthLoginUseCase authLoginUseCase;
   final AppNavigator appNavigator;
 
-  GetxLoginPresenter({
+  GetxSignUpPresenter({
     required this.authLoginUseCase,
     required this.appNavigator
   });
@@ -22,48 +20,53 @@ class GetxLoginPresenter extends GetxController with UIErrorManager implements L
   String password = '';
 
   @override
-  void validadeEmail(String email){
+  void validateEmail(String email){
     this.email = email;
   }
 
   @override
-  void validadePassword(String password) {
+  void validatePassword(String password) {
     this.password = password;
   }
 
   @override
-  Future<bool> login() async {
+  Future<bool> signUp() async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
-          password: password
+          password: password,
       );
       return true;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
+      if (e.code == 'weak-password') {
         showSnackbarError(message: 'No user found for that email.');
         print('No user found for that email.');
         return false;
-      } else if (e.code == 'wrong-password') {
-        showSnackbarError(message: 'Wrong password provided for that user.');
-        print('Wrong password provided for that user.');
+      } else if (e.code == 'email-already-in-use') {
+        showSnackbarError(message: 'The account already exists for that email.');
+        print('The account already exists for that email.');
         return false;
       }
+      return false;
+    } catch (e) {
+      print(e);
       return false;
     }
   }
 
-  @override
-  void goToHome(){
-    appNavigator.pushNamed(
-      AppRoutes.homePage,
-    );
-  }
+
 
   @override
   void goToSignUp() {
     appNavigator.pushNamed(
       AppRoutes.signUp,
-    );
+    );  }
+
+  @override
+  String? validateConfirmPassword(String password) {
+    if(password != this.password){
+      return 'As senhas devem ser iguais';
+    }
+    return null;
   }
 }

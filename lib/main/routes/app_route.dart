@@ -23,6 +23,7 @@ class AppRoutes {
   static const splashPage = '/';
   static const homePage = 'home';
   static const loginPage = 'login';
+  static const signUp = 'signUp';
 
   static List<AppRoute> get routesList => [
         AppRoute(
@@ -36,6 +37,10 @@ class AppRoutes {
         AppRoute(
           name: homePage,
           child: (_) => makeHomePage(),
+        ),
+        AppRoute(
+          name: signUp,
+          child: (_) => makeSignUpPage(),
         ),
       ];
 }
