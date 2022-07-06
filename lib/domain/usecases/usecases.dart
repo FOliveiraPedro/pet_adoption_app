@@ -1,2 +1,2 @@
-export 'auth/auth.dart';
-export 'current_account/current_account.dart';
+export './search_cat/search_cat.dart';
+export './search_dog/search_dog.dart';

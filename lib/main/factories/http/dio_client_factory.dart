@@ -5,8 +5,9 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../../data/http/http.dart';
 import '../../../infra/http/http.dart';
 
-HttpClient makeDioAdapter() {
+HttpClient makeDioAdapter({Duration? timeout}) {
   final Dio client = Dio();
+
   if (kDebugMode) {
     client.interceptors.add(
       PrettyDioLogger(
@@ -16,6 +17,8 @@ HttpClient makeDioAdapter() {
       ),
     );
   }
-
-  return DioAdapter(client: client);
+  return DioAdapter(
+    timeout: timeout ?? const Duration(seconds: 15),
+    client: client,
+  );
 }

@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:equatable/equatable.dart';
+
 enum ErrorCode {
   AP400,
   AP401,
@@ -20,14 +22,15 @@ enum ErrorCode {
   SST02,
   SST03,
   UNEXP,
+  CONNE,
 }
 
-class DomainError implements Exception {
+class DomainError extends Equatable implements Exception {
   final ErrorCode code;
   final String message;
   final Map<String, dynamic> payload;
 
-  DomainError({
+  const DomainError({
     required this.code,
     required this.message,
     required this.payload,
@@ -35,8 +38,12 @@ class DomainError implements Exception {
 
   @override
   String toString() => code.name;
+
+  @override
+  List<Object> get props => [code, message, payload];
 }
 
 extension DomainErrorExtension on DomainError {
-  DomainError toDomainError() => DomainError(code: code, message: message, payload: payload);
+  DomainError toDomainError() =>
+      DomainError(code: code, message: message, payload: payload);
 }

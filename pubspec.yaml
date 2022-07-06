@@ -1,4 +1,4 @@
-name: project_pattern
+name: pet_adoption
 description: Project Pattertn for Flutter.
 
 publish_to: "none"
@@ -14,8 +14,8 @@ dependencies:
   device_info_plus: ^3.2.1
   dio: ^4.0.4
   equatable: ^2.0.3
-  firebase_core: ^1.11.0
-  firebase_messaging: ^11.2.5
+  firebase_auth: ^3.4.1
+  firebase_core: ^1.17.0
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
@@ -25,6 +25,7 @@ dependencies:
   flutter_secure_storage: ^5.0.2
   flutter_svg: ^1.0.1
   get: ^4.6.1
+  google_fonts: ^3.0.1
   http_parser: ^4.0.0
   image_picker: ^0.8.4+4
   intl: ^0.17.0

@@ -4,16 +4,14 @@ import 'app_colors.dart';
 import 'app_text_theme.dart';
 
 mixin AppTheme {
-  static const Color _lightFillColor = AppColors.black;
-  static const Color _darkFillColor = AppColors.background;
+  static const Color _defaultFillColor = AppColors.neutral0;
+  static final Color _defaultDocusColor = _defaultFillColor.withOpacity(0.12);
 
-  static final Color _lightFocusColor = _lightFillColor.withOpacity(0.12);
-  static final Color _darkFocusColor = _darkFillColor.withOpacity(0.12);
+  static ThemeData defaultThemeData =
+      themeData(defaultColorScheme, _defaultDocusColor);
 
-  static ThemeData lightThemeData = themeData(lightColorScheme, _lightFocusColor);
-  static ThemeData darkThemeData = themeData(darkColorScheme, _darkFocusColor);
-
-  static ThemeData themeData(final ColorScheme colorScheme, final Color focusColor) => ThemeData(
+  static ThemeData themeData(ColorScheme colorScheme, Color focusColor) =>
+      ThemeData(
         canvasColor: colorScheme.background,
         colorScheme: colorScheme,
         disabledColor: colorScheme.onBackground.withAlpha(40),
@@ -21,49 +19,34 @@ mixin AppTheme {
         elevatedButtonTheme: elevatedButtonThemeData(colorScheme),
         errorColor: colorScheme.error,
         focusColor: focusColor,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Inter',
         highlightColor: Colors.transparent,
         iconTheme: IconThemeData(color: colorScheme.onPrimary),
         inputDecorationTheme: inputDecorationTheme(colorScheme),
         primaryColor: colorScheme.primary,
-        primaryColorLight: colorScheme.primaryVariant,
+        primaryColorLight: colorScheme.primaryContainer,
         scaffoldBackgroundColor: colorScheme.background,
-        textTheme: AppTextTheme.montserratTextTheme,
+        splashColor: AppColors.neutral7.withOpacity(0.2),
       );
 
-  static const ColorScheme lightColorScheme = ColorScheme(
-    background: AppColors.background,
+  static const ColorScheme defaultColorScheme = ColorScheme(
+    background: AppColors.neutral7,
     brightness: Brightness.light,
     error: AppColors.danger,
-    onBackground: AppColors.black,
-    onError: AppColors.background,
-    onPrimary: AppColors.background,
-    onSecondary: AppColors.background,
-    onSurface: AppColors.black,
-    primary: AppColors.hotPink,
-    primaryVariant: AppColors.pink,
-    secondary: AppColors.purple,
-    secondaryVariant: AppColors.heavyPurple,
-    surface: AppColors.background,
+    onBackground: AppColors.neutral0,
+    onError: AppColors.neutral7,
+    onPrimary: AppColors.neutral7,
+    onSecondary: AppColors.neutral7,
+    onSurface: AppColors.neutral0,
+    primary: AppColors.primary,
+    secondary: AppColors.secondary,
+    surface: AppColors.neutral7,
   );
 
-  static const ColorScheme darkColorScheme = ColorScheme(
-    background: AppColors.black,
-    brightness: Brightness.dark,
-    error: AppColors.danger,
-    onBackground: AppColors.background,
-    onError: AppColors.black,
-    onPrimary: AppColors.black,
-    onSecondary: AppColors.black,
-    onSurface: AppColors.background,
-    primary: AppColors.hotPink,
-    primaryVariant: AppColors.pink,
-    secondary: AppColors.purple,
-    secondaryVariant: AppColors.heavyPurple,
-    surface: AppColors.black,
-  );
-
-  static ElevatedButtonThemeData elevatedButtonThemeData(final ColorScheme colorScheme) => ElevatedButtonThemeData(
+  static ElevatedButtonThemeData elevatedButtonThemeData(
+    ColorScheme colorScheme,
+  ) =>
+      ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           elevation: 0,
           onPrimary: colorScheme.onPrimary,
@@ -71,11 +54,15 @@ mixin AppTheme {
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
           primary: colorScheme.primary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          textStyle: AppTextTheme.montserratTextTheme.subtitle1?.copyWith(color: colorScheme.onPrimary),
+          textStyle:
+              AppTextTheme.subtitle1.copyWith(color: colorScheme.onPrimary),
         ),
       );
 
-  static InputDecorationTheme inputDecorationTheme(final ColorScheme colorScheme) => InputDecorationTheme(
+  static InputDecorationTheme inputDecorationTheme(
+    ColorScheme colorScheme,
+  ) =>
+      InputDecorationTheme(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
@@ -106,8 +93,8 @@ mixin AppTheme {
             color: colorScheme.error,
           ),
         ),
-        labelStyle: AppTextTheme.montserratTextTheme.bodyText1,
-        hintStyle: AppTextTheme.montserratTextTheme.subtitle1?.copyWith(
+        labelStyle: AppTextTheme.paragraph1,
+        hintStyle: AppTextTheme.subtitle1.copyWith(
           color: colorScheme.onBackground.withAlpha(40),
         ),
       );
