@@ -8,11 +8,9 @@ import '../../../ui/pages/pages.dart';
 import '../../mixins/mixins.dart';
 
 class GetxSignUpPresenter extends GetxController with UIErrorManager implements SignUpPresenter {
-  final AuthLoginUseCase authLoginUseCase;
   final AppNavigator appNavigator;
 
   GetxSignUpPresenter({
-    required this.authLoginUseCase,
     required this.appNavigator
   });
 

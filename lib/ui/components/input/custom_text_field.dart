@@ -45,7 +45,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         maxLength: 100,
         cursorColor: AppColors.neutral0,
         style: GoogleFonts.workSans(
-          color: AppColors.purple,
+          color: AppColors.primary,
           fontSize: 18,
           fontWeight: FontWeight.w500,
         ),
@@ -89,7 +89,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   OutlineInputBorder colorBorder() => OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(width: 2, color: AppColors.purple),
+        borderSide: const BorderSide(width: 2, color: AppColors.primary),
       );
 
   OutlineInputBorder errorBorder() => OutlineInputBorder(

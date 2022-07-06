@@ -6,13 +6,9 @@ import '../../domain/usecases/usecases.dart';
 
 class AuthorizeDioClientDecorator implements HttpClient {
   final HttpClient decoratee;
-  final FetchCurrentAccountUseCase fetchCurrentAccount;
-  final DeleteCurrentAccountUseCase deleteCurrentAccount;
 
   AuthorizeDioClientDecorator({
     required this.decoratee,
-    required this.fetchCurrentAccount,
-    required this.deleteCurrentAccount,
   });
 
   @override
@@ -26,13 +22,12 @@ class AuthorizeDioClientDecorator implements HttpClient {
     final bool sendingMultipleFiles = false,
   }) async {
     try {
-      final AccountEntity account = await fetchCurrentAccount.call();
       final Map<String, String> authorizedHeaders = {};
-      if (headers.isEmpty) {
-        authorizedHeaders.addAll({'Authorization': 'Bearer ${account.token}'});
-      } else {
-        headers.addAll({'Authorization': 'Bearer ${account.token}'});
-      }
+      // if (headers.isEmpty) {
+      //   authorizedHeaders.addAll({'Authorization': 'Bearer ${account.token}'});
+      // } else {
+      //   headers.addAll({'Authorization': 'Bearer ${account.token}'});
+      // }
       return await decoratee.request(
         url: url,
         method: method,
@@ -46,7 +41,6 @@ class AuthorizeDioClientDecorator implements HttpClient {
       if (error.code != ErrorCode.AP403) {
         rethrow;
       } else {
-        await deleteCurrentAccount.call();
         throw HttpError.forbidden();
       }
     }

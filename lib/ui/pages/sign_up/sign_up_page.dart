@@ -47,7 +47,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           style: GoogleFonts.workSans(
                             color: changeColor
                                 ? AppColors.danger
-                                : AppColors.purple,
+                                : AppColors.primary,
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
@@ -63,7 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           style: GoogleFonts.workSans(
                             color: changeColor
                                 ? AppColors.danger
-                                : AppColors.purple,
+                                : AppColors.primary,
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
@@ -79,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           style: GoogleFonts.workSans(
                             color: changeColor
                                 ? AppColors.danger
-                                : AppColors.purple,
+                                : AppColors.primary,
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
@@ -118,7 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: AppColors.purple,
+                            color: AppColors.primary,
                           ),
                           child: Center(
                             child: isLoading

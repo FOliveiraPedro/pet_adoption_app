@@ -43,7 +43,7 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
         obscureText: obscureText,
         cursorColor: AppColors.neutral0,
         style: GoogleFonts.workSans(
-          color: AppColors.purple,
+          color: AppColors.primary,
           fontSize: 18,
           fontWeight: FontWeight.w500,
         ),
@@ -76,8 +76,8 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
             child: GestureDetector(
               onTap: _onVisibilityButtonClick,
               child: obscureText
-                  ? const Icon(Icons.visibility_off, color: AppColors.purple,)
-                  : const Icon(Icons.visibility, color: AppColors.purple,),
+                  ? const Icon(Icons.visibility_off, color: AppColors.primary,)
+                  : const Icon(Icons.visibility, color: AppColors.primary,),
             ),
           ),
           suffixIconConstraints: const BoxConstraints(
@@ -90,7 +90,7 @@ class _CustomPasswordTextFieldState extends State<CustomPasswordTextField> {
 
   OutlineInputBorder colorBorder() => OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(width: 2, color: AppColors.purple),
+        borderSide: const BorderSide(width: 2, color: AppColors.primary),
       );
 
   OutlineInputBorder errorBorder() => OutlineInputBorder(

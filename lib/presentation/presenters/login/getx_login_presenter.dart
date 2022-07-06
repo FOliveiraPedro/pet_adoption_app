@@ -10,11 +10,10 @@ import '../../helpers/helpers.dart';
 import '../../mixins/mixins.dart';
 
 class GetxLoginPresenter extends GetxController with UIErrorManager implements LoginPresenter {
-  final AuthLoginUseCase authLoginUseCase;
   final AppNavigator appNavigator;
 
   GetxLoginPresenter({
-    required this.authLoginUseCase,
+
     required this.appNavigator
   });
 

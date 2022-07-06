@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: GoogleFonts.workSans(
                             color: changeColor
                                 ? AppColors.danger
-                                : AppColors.purple,
+                                : AppColors.primary,
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: GoogleFonts.workSans(
                             color: changeColor
                                 ? AppColors.danger
-                                : AppColors.purple,
+                                : AppColors.primary,
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
@@ -83,6 +83,8 @@ class _LoginPageState extends State<LoginPage> {
                               setState((){
                                 isLoading = false;
                               });
+                              Navigator.pop(context);
+                              Navigator.pop(context);
                               widget.presenter.goToHome();
                             }
                           } else {
@@ -98,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: AppColors.purple,
+                            color: AppColors.primary,
                           ),
                           child: Center(
                             child: isLoading
@@ -125,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         'Sign Up',
                         style: GoogleFonts.workSans(
-                          color: AppColors.purple,
+                          color: AppColors.primary,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import '../../theme/theme.dart';
 import '../pages.dart';
 
 class SplashPage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) => const Scaffold(
-        backgroundColor: Colors.amber,
+        backgroundColor: AppColors.primary,
         body: Center(
           child: Text('Splash'),
         ),
