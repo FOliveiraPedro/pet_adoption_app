@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> with UIErrorManager {
                             itemCount: snapshot.data?.length,
                             itemBuilder: (context, index) => GestureDetector(
                               onTap: (){
-
+                                widget.presenter.goToDetails(snapshot.data![index]);
                               },
                               child: AnimalCard(
                                 name: snapshot.data![index].name,
