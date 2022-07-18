@@ -24,6 +24,7 @@ class AppRoutes {
   static const homePage = 'home';
   static const loginPage = 'login';
   static const signUp = 'signUp';
+  static const details = 'details';
 
   static List<AppRoute> get routesList => [
         AppRoute(
@@ -41,6 +42,10 @@ class AppRoutes {
         AppRoute(
           name: signUp,
           child: (_) => makeSignUpPage(),
+        ),
+        AppRoute(
+          name: details,
+          child: (args) => makeDetailsPage(animalEntity: args.data['animal']),
         ),
       ];
 }

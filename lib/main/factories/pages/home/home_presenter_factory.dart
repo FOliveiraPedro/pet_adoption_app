@@ -5,5 +5,6 @@ import '../../usecases/search_cat/search_cat.dart';
 
 HomePresenter makeGetxHomePresenter() => GetxHomePresenter(
   searchDogBreedsUsecase: makeRemoteSearchDogBreeds(),
-  searchCatBreedsUsecase: makeRemoteSearchCatBreeds()
+  searchCatBreedsUsecase: makeRemoteSearchCatBreeds(),
+  appNavigator: makeAppNavigator(),
 );

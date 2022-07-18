@@ -6,4 +6,6 @@ abstract class HomePresenter {
 
   Stream<List<AnimalEntity>> get animalBreedsStream;
   Future<void> getBreedList();
+
+  void goToDetails(AnimalEntity animalEntity);
 }
